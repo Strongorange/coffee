@@ -15,7 +15,9 @@ const Container = styled.article`
   background-color: transparent;
   @media (max-width: 950px) {
     height: 20vh;
-    margin-top: 0px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    padding-bottom: 0;
   }
 `;
 

@@ -7,6 +7,7 @@ import React from "react";
 
 function Header() {
   const [showMenu, setShowMenu] = useState(false);
+  const [changed, setChanged] = useState(false);
 
   const toggleShowMenu = () => {
     showMenu ? setShowMenu(false) : setShowMenu(true);
@@ -39,20 +40,9 @@ function Header() {
           <li>
             <Link to="/">HOME</Link>
           </li>
-          <li>
-            <a href="#">COFFEE</a>
-          </li>
-          <li>
-            <a href="#">COLD BREW</a>
-          </li>
-          <li>
-            <a href="#">BAKERY</a>
-          </li>
+
           <li>
             <Link to="/shop">SHOP</Link>
-          </li>
-          <li>
-            <a href="#">LOGIN</a>
           </li>
         </ul>
       </nav>
@@ -74,19 +64,7 @@ function Header() {
             <Link to="/">HOME</Link>
           </li>
           <li>
-            <a href="#">COFFEE</a>
-          </li>
-          <li>
-            <a href="#">COLD BREW</a>
-          </li>
-          <li>
-            <a href="#">BAKERY</a>
-          </li>
-          <li>
             <Link to="/shop">SHOP</Link>
-          </li>
-          <li>
-            <a href="#">LOGIN</a>
           </li>
         </ul>
       </div>
