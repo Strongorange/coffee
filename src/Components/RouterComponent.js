@@ -1,25 +1,26 @@
 import React from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "../Screens/Home";
-import Login from "../Screens/Login";
 import Shop from "../Screens/Shop";
 import Footer from "./Footer";
 import Header from "./Header";
 import PageNotFound from "./PageNotFound";
 import ScrollToTop from "./ScrollToTop";
+import Signup from "../Screens/Signup";
+import Login from "../Screens/Login";
 
 const RouterComponent = () => {
   return (
     <Router>
       <ScrollToTop />
       <Header />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/shop" exact component={Shop} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/signup" exact component={Home} />
-        <Route component={PageNotFound} />
-      </Switch>
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+        <Route path="/shop" exact element={<Shop />} />
+        <Route path="/login" exact element={<Login />} />
+        <Route path="/signup" exact element={<Signup />} />
+        <Route element={<PageNotFound />} />
+      </Routes>
       <Footer />
     </Router>
   );

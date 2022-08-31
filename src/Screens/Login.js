@@ -1,14 +1,14 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { FBauth } from "../Firebase/FB";
+import {
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserSessionPersistence,
+} from "firebase/auth";
 
-const Article = styled.article`
-  width: 100%;
-  height: 70vh;
-  display: flex;
-`;
+const Article = styled.article``;
 
 const Form = styled.form`
   display: flex;
@@ -26,16 +26,17 @@ const PwInput = styled.input``;
 
 const LoginBtn = styled.button``;
 
-const SignupBtn = styled(LoginBtn)``;
-
 const NormalText = styled.span``;
 
+const SignupBtn = styled.button``;
+
 const Login = () => {
-  // State, Variable
+  // State, Variables
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
+  const navigate = useNavigate();
 
-  // Functions
+  // Funtions
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -44,23 +45,24 @@ const Login = () => {
     setPw(e.target.value);
   };
 
-  const onSignup = (email, pw) => {
+  const onClickSinup = () => {
+    navigate("/signup");
+  };
+
+  const onSubmit = (email, pw) => {
     try {
-      createUserWithEmailAndPassword(FBauth, email, pw)
+      signInWithEmailAndPassword(FBauth, email, pw)
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
+          console.log("login success");
+          navigate("/");
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
+          console.log(error.code);
+          console.log(error.message);
         });
-      console.log("finish");
     } catch (error) {
       console.log(error);
-    } finally {
-      //
     }
   };
 
@@ -68,26 +70,23 @@ const Login = () => {
     <Article>
       <Form>
         <Hdiv>
-          <NormalText>EMAIL : </NormalText>
+          <NormalText>EMAIL : &nbsp;</NormalText>
           <EmailInput
-            type="text"
-            value={email}
+            type="email"
             onChange={onChangeEmail}
-            placeholder="이메일을 입력하세요"
+            value={email}
+            required
           />
         </Hdiv>
         <Hdiv>
-          <NormalText>PW : </NormalText>
-          <PwInput
-            type="password"
-            value={pw}
-            onChange={onChangePw}
-            placeholder="비밀번호를 입력하세요"
-          />
+          <NormalText>PW : &nbsp;</NormalText>
+          <PwInput type="password" onChange={onChangePw} value={pw} required />
         </Hdiv>
-        <LoginBtn>로그인</LoginBtn>
-        <SignupBtn onClick={() => onSignup(email, pw)}>
-          <Link>회원가입</Link>
+        <LoginBtn type="submit" onClick={() => onSubmit(email, pw)}>
+          로그인
+        </LoginBtn>
+        <SignupBtn type="button" onClick={onClickSinup}>
+          회원가입
         </SignupBtn>
       </Form>
     </Article>

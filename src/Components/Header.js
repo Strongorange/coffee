@@ -49,7 +49,7 @@ function Header() {
                 <Link to="/shop">Shop</Link>
               </Dropdown.Item>
               <Dropdown.Item>
-                <Link to="/login">Log in</Link>
+                <Link to="/signup">Sign Up</Link>
               </Dropdown.Item>
             </div>
           </Dropdown.Menu>

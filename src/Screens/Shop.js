@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import coffeeData from "../coffee";
@@ -9,6 +9,7 @@ import ShopGrid from "../Components/ShopGrid";
 import ShopGridReverse from "../Components/ShopGridReverse";
 import Grid2_1 from "../Components/Grid2_1";
 import Fade from "react-reveal/Fade";
+import { UserContext } from "../Contexts/Context";
 
 const SLink = styled(Link)`
   all: unset;
@@ -27,6 +28,9 @@ const SLink = styled(Link)`
 
 function Shop() {
   const [coffee, setCoffee] = useState([]);
+  const { user } = useContext(UserContext);
+
+  console.log(user);
 
   useEffect(() => {
     setCoffee(coffeeData);
