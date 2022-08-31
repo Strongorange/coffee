@@ -1,17 +1,8 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
-import { faWindowClose } from "@fortawesome/free-regular-svg-icons";
 import { useState, useEffect } from "react";
 import Zoom from "react-reveal/Zoom";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const [showMenu, setShowMenu] = useState(false);
-
-  const toggleShowMenu = () => {
-    showMenu ? setShowMenu(false) : setShowMenu(true);
-  };
-
   return (
     <>
       <main className="main">
@@ -36,25 +27,25 @@ const Home = () => {
               <div className="item__img"></div>
               <h3>커피 본연의 맛을 찾아</h3>
               <p>In search of natural born Sweetness</p>
-              <a href="#">Show Detail</a>
+              <Link to="/">Show Detail</Link>
             </div>
             <div className="grid__item">
               <div className="item__img"></div>
               <h3>조화로운 열의 전달</h3>
               <p>Harmonious heat Delivery</p>
-              <a href="#">Show Detail</a>
+              <Link to="/">Show Detail</Link>
             </div>
             <div className="grid__item">
               <div className="item__img"></div>
               <h3>블렌드? 상상만 했던 그 맛!</h3>
               <p>Blend: Mix & Match</p>
-              <a href="#">Show Detail</a>
+              <Link to="/">Show Detail</Link>
             </div>
             <div className="grid__item">
               <div className="item__img"></div>
               <h3>로스팅: 달콤함의 발현</h3>
               <p>More than just a Rating</p>
-              <a href="#">Show Detail</a>
+              <Link to="/">Show Detail</Link>
             </div>
           </div>
         </article>

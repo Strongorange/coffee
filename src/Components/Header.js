@@ -11,11 +11,11 @@ function Header() {
     <header className="header">
       <div className="fakediv"> </div>
       <div className="header__title">
-        <a href="/">
+        <Link to="/">
           <h1>
             HOME<br></br>PRESSURE
           </h1>
-        </a>
+        </Link>
       </div>
 
       <nav>
@@ -35,18 +35,23 @@ function Header() {
 
       <div className="mobile__menu">
         <Dropdown>
-          <Dropdown.Toggle variant="succeess" id="dropdown_basic">
+          <Dropdown.Toggle variant="succeess" id="dropdown_basic" size="md">
             <span>
               <FontAwesomeIcon icon={faBars} />
             </span>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item>
-              <Link to="/">Home</Link>
-            </Dropdown.Item>
-            <Dropdown.Item>
-              <Link to="/shop">Shop</Link>
-            </Dropdown.Item>
+            <div className="header_drop_menu">
+              <Dropdown.Item>
+                <Link to="/">Home</Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link to="/shop">Shop</Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link to="/login">Log in</Link>
+              </Dropdown.Item>
+            </div>
           </Dropdown.Menu>
         </Dropdown>
       </div>

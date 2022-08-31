@@ -102,6 +102,18 @@ a {
     }
   }
 
+  .header_drop_menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 150px;
+
+    padding: 30px;
+    padding-top: 15px;
+    gap: 20px;
+  }
+
   .fakediv {
     display: none;
     @include mobile {
@@ -589,9 +601,10 @@ footer {
   justify-content: center;
   background-color: #f0f0f0;
   width: 100%;
-  padding: 70px 0px;
+  height: 20vh;
+  padding: 60px 0px;
   @include mobile {
-    padding: 40px 0;
+    padding: 10px 0;
   }
 
   .footer__grid {
