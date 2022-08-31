@@ -4,35 +4,18 @@ import { faWindowClose } from "@fortawesome/free-regular-svg-icons";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import React from "react";
+import Dropdown from "react-bootstrap/Dropdown";
 
 function Header() {
-  const [showMenu, setShowMenu] = useState(false);
-  const [changed, setChanged] = useState(false);
-
-  const toggleShowMenu = () => {
-    showMenu ? setShowMenu(false) : setShowMenu(true);
-  };
-
-  const watchMenu = () => {
-    if (showMenu) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-  };
-
-  useEffect(() => {
-    watchMenu();
-    return watchMenu();
-  }, [showMenu]);
-
   return (
     <header className="header">
       <div className="fakediv"> </div>
       <div className="header__title">
-        <h1>
-          HOME<br></br>PRESSURE
-        </h1>
+        <a href="/">
+          <h1>
+            HOME<br></br>PRESSURE
+          </h1>
+        </a>
       </div>
 
       <nav>
@@ -51,22 +34,21 @@ function Header() {
       </span>
 
       <div className="mobile__menu">
-        <span>
-          <FontAwesomeIcon
-            icon={showMenu ? faWindowClose : faBars}
-            onClick={toggleShowMenu}
-          />
-        </span>
-      </div>
-      <div className={showMenu ? "side_menu" : "side_menu hide"}>
-        <ul>
-          <li>
-            <Link to="/">HOME</Link>
-          </li>
-          <li>
-            <Link to="/shop">SHOP</Link>
-          </li>
-        </ul>
+        <Dropdown>
+          <Dropdown.Toggle variant="succeess" id="dropdown_basic">
+            <span>
+              <FontAwesomeIcon icon={faBars} />
+            </span>
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item>
+              <Link to="/">Home</Link>
+            </Dropdown.Item>
+            <Dropdown.Item>
+              <Link to="/shop">Shop</Link>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </div>
     </header>
   );

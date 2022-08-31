@@ -4,6 +4,7 @@
 @import "./mobile.scss";
 @import "./animations.scss";
 @import "./shop.scss";
+@import "~bootstrap/scss/bootstrap";
 
 * {
   font-family: "Noto Sans KR", sans-serif;
@@ -33,6 +34,8 @@ a {
 #root {
   position: relative;
 }
+
+// Header
 
 .header {
   font-family: "Roboto", sans-serif;
@@ -81,53 +84,6 @@ a {
     }
   }
 
-  .side_menu {
-    display: none;
-    @include mobile {
-      display: flex;
-      position: absolute;
-      width: 70%;
-      height: 100%;
-      top: 8vh;
-      left: 0;
-      background-color: #f0f0f0;
-      height: 100vh;
-      animation: slideIn 0.5s ease-in-out;
-
-      ul {
-        display: flex;
-        gap: 25px;
-        flex-direction: column;
-        color: black;
-        padding-top: 8vh;
-        padding-left: 15px;
-        font-size: 16px;
-        li {
-          padding: 15px 10px;
-          border-radius: 20px;
-          transition: all 0.2s ease-in-out;
-          &:hover {
-            background-color: #4a68d9;
-            color: white;
-          }
-          a {
-            font-size: 32px;
-            transition: all 0.2s ease-in-out;
-            &:hover {
-              color: white;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .side_menu.hide {
-    @include mobile {
-      animation: slideOut 0.4s ease-in-out forwards;
-    }
-  }
-
   a {
     padding: 0;
     text-decoration: none;
@@ -154,6 +110,8 @@ a {
     }
   }
 }
+
+// Home
 
 article {
   background-color: cornflowerblue;

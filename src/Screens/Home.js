@@ -3,6 +3,7 @@ import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 import { faWindowClose } from "@fortawesome/free-regular-svg-icons";
 import { useState, useEffect } from "react";
 import Zoom from "react-reveal/Zoom";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -10,19 +11,6 @@ const Home = () => {
   const toggleShowMenu = () => {
     showMenu ? setShowMenu(false) : setShowMenu(true);
   };
-
-  const watchMenu = () => {
-    if (showMenu) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-  };
-
-  useEffect(() => {
-    watchMenu();
-    return watchMenu();
-  }, [showMenu]);
 
   return (
     <>
@@ -149,7 +137,7 @@ const Home = () => {
           <div className="text__divider"> </div>
           <span>ALL PRODUCTS</span>
           <div className="eighth_article_img"></div>
-          <a href="#">Go to Shop</a>
+          <Link to={"/shop"}>Go to Shop</Link>
         </article>
       </main>
     </>
