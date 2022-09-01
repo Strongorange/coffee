@@ -1,7 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { FBauth, signInGoogleWithPopup } from "../Firebase/FB";
+import {
+  FBauth,
+  signInGithubWithPopup,
+  signInGoogleWithPopup,
+} from "../Firebase/FB";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { UserContext } from "../Contexts/Context";
 
@@ -82,7 +86,14 @@ const Login = () => {
     } catch (error) {
       console.log(`error from googlepopup login catch state : \n ${error}`);
     }
-    console.log("google clicked");
+  };
+
+  const onClickGithubLogin = () => {
+    try {
+      signInGithubWithPopup();
+    } catch (error) {
+      console.log(`error from Githubpopup login catch state : \n ${error}`);
+    }
   };
 
   useEffect(() => {
@@ -114,7 +125,7 @@ const Login = () => {
         </SignupBtn>
         <SocialLoginView>
           <SocialIcon onClick={onClickGoogleLogin}>구글</SocialIcon>
-          <SocialIcon>깃헙</SocialIcon>
+          <SocialIcon onClick={onClickGithubLogin}>깃헙</SocialIcon>
         </SocialLoginView>
       </Form>
     </Article>

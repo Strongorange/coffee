@@ -6,6 +6,7 @@ import {
   browserSessionPersistence,
   GoogleAuthProvider,
   signInWithPopup,
+  GithubAuthProvider,
 } from "firebase/auth";
 
 console.log(`from FB ${process.env.REACT_APP_FB_APIKEY}`);
@@ -27,11 +28,12 @@ export const FBapp = initializeApp(firebaseConfig);
 
 export const FBauth = getAuth(FBapp);
 
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
+
+const githubProvider = new GithubAuthProvider();
 
 export const signInGoogleWithPopup = () => {
-  //
-  signInWithPopup(FBauth, provider)
+  signInWithPopup(FBauth, googleProvider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -57,7 +59,26 @@ export const signInGoogleWithPopup = () => {
 };
 
 export const signInGithubWithPopup = () => {
-  //
+  signInWithPopup(FBauth, githubProvider)
+    .then((result) => {
+      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+      const credential = GithubAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+
+      // The signed-in user info.
+      const user = result.user;
+      // ...
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GithubAuthProvider.credentialFromError(error);
+      // ...
+    });
 };
 
 setPersistence(FBauth, browserSessionPersistence);
