@@ -8,17 +8,18 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
+console.log(`from FB ${process.env.REACT_APP_FB_APIKEY}`);
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBKvoFCHGl_Ynhhd8p34mNFlpYRnkqDt_8",
-  authDomain: "home-pressure.firebaseapp.com",
-  projectId: "home-pressure",
-  storageBucket: "home-pressure.appspot.com",
-  messagingSenderId: "382369777360",
-  appId: "1:382369777360:web:6e28d355dc021cd87b00d5",
+  apiKey: process.env.REACT_APP_FB_APIKEY,
+  authDomain: process.env.REACT_APP_FB_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FB_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FB_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FB_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FB_APP_ID,
 };
 
 // Initialize Firebase
@@ -53,6 +54,10 @@ export const signInGoogleWithPopup = () => {
       console.log(errorMessage);
       // ...
     });
+};
+
+export const signInGithubWithPopup = () => {
+  //
 };
 
 setPersistence(FBauth, browserSessionPersistence);

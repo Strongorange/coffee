@@ -89,7 +89,7 @@ const Login = () => {
     if (isLoggedIn) {
       navigate("/");
     }
-  }, []);
+  }, [isLoggedIn]);
 
   // Return Components
   return (
