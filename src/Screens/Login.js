@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { FBauth } from "../Firebase/FB";
-import {
-  signInWithEmailAndPassword,
-  setPersistence,
-  browserSessionPersistence,
-} from "firebase/auth";
+import { FBauth, signInGoogleWithPopup } from "../Firebase/FB";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { UserContext } from "../Contexts/Context";
 
 const Article = styled.article``;
 
@@ -30,11 +27,19 @@ const NormalText = styled.span``;
 
 const SignupBtn = styled.button``;
 
+const SocialLoginView = styled(Hdiv)`
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const SocialIcon = styled.span``;
+
 const Login = () => {
   // State, Variables
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const navigate = useNavigate();
+  const { isLoggedIn } = useContext(UserContext);
 
   // Funtions
   const onChangeEmail = (e) => {
@@ -49,11 +54,10 @@ const Login = () => {
     navigate("/signup");
   };
 
-  const onSubmit = (email, pw) => {
+  const onClickLogin = (email, pw) => {
     try {
       signInWithEmailAndPassword(FBauth, email, pw)
         .then((userCredential) => {
-          const user = userCredential.user;
           console.log("login success");
           navigate("/");
         })
@@ -66,9 +70,31 @@ const Login = () => {
     }
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    onClickLogin(email, pw);
+    console.log("submitted");
+  };
+
+  const onClickGoogleLogin = () => {
+    try {
+      signInGoogleWithPopup();
+    } catch (error) {
+      console.log(`error from googlepopup login catch state : \n ${error}`);
+    }
+    console.log("google clicked");
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, []);
+
+  // Return Components
   return (
     <Article>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <Hdiv>
           <NormalText>EMAIL : &nbsp;</NormalText>
           <EmailInput
@@ -82,12 +108,14 @@ const Login = () => {
           <NormalText>PW : &nbsp;</NormalText>
           <PwInput type="password" onChange={onChangePw} value={pw} required />
         </Hdiv>
-        <LoginBtn type="submit" onClick={() => onSubmit(email, pw)}>
-          로그인
-        </LoginBtn>
+        <LoginBtn type="submit">로그인</LoginBtn>
         <SignupBtn type="button" onClick={onClickSinup}>
           회원가입
         </SignupBtn>
+        <SocialLoginView>
+          <SocialIcon onClick={onClickGoogleLogin}>구글</SocialIcon>
+          <SocialIcon>깃헙</SocialIcon>
+        </SocialLoginView>
       </Form>
     </Article>
   );
