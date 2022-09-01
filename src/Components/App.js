@@ -7,15 +7,17 @@ import { FBauth } from "../Firebase/FB";
 
 const App = () => {
   // States, Variables
-  const { setUser } = useContext(UserContext);
+  const { setUser, setIsLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     onAuthStateChanged(FBauth, (user) => {
       if (user) {
         const uid = user.uid;
         setUser(user);
+        setIsLoggedIn(true);
         console.log(`Logged in ${uid}`);
       } else {
+        setIsLoggedIn(false);
         console.log("logged out");
       }
     });

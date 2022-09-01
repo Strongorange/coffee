@@ -1,12 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
-import { faWindowClose } from "@fortawesome/free-regular-svg-icons";
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useContext } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
+import { UserContext } from "../Contexts/Context";
+import { signOut } from "firebase/auth";
+import { FBauth } from "../Firebase/FB";
 
 function Header() {
+  // States, Variables
+  const { isLoggedIn } = useContext(UserContext);
+
+  // Funtions
+  const onSignOut = () => {
+    signOut(FBauth)
+      .then(() => console.log("로그아웃 성공"))
+      .catch((error) => console.log(`from onSignout Header.js ${error}`));
+  };
+
   return (
     <header className="header">
       <div className="fakediv"> </div>
@@ -15,6 +26,7 @@ function Header() {
           <h1>
             HOME<br></br>PRESSURE
           </h1>
+          <h1>Logged In : &nbsp;{String(isLoggedIn)}</h1>
         </Link>
       </div>
 
@@ -48,9 +60,23 @@ function Header() {
               <Dropdown.Item>
                 <Link to="/shop">Shop</Link>
               </Dropdown.Item>
-              <Dropdown.Item>
-                <Link to="/signup">Sign Up</Link>
-              </Dropdown.Item>
+              {isLoggedIn ? (
+                <>
+                  <Dropdown.Item>
+                    <Link to="/profile">Profile</Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={onSignOut}>Log Out</Dropdown.Item>
+                </>
+              ) : (
+                <>
+                  <Dropdown.Item>
+                    <Link to="/login">Log In</Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link to="/signup">Sign Up</Link>
+                  </Dropdown.Item>
+                </>
+              )}
             </div>
           </Dropdown.Menu>
         </Dropdown>
