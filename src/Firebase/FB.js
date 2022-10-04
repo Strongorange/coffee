@@ -9,7 +9,6 @@ import {
   GithubAuthProvider,
 } from "firebase/auth";
 
-console.log(`from FB ${process.env.REACT_APP_FB_APIKEY}`);
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -40,8 +39,8 @@ export const signInGoogleWithPopup = () => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
+      window.alert("로그인 완료");
       // ...
-      return user;
     })
     .catch((error) => {
       // Handle Errors here.
@@ -67,6 +66,7 @@ export const signInGithubWithPopup = () => {
 
       // The signed-in user info.
       const user = result.user;
+      window.alert("로그인 완료");
       // ...
     })
     .catch((error) => {

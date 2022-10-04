@@ -3,7 +3,6 @@ import Zoom from "react-reveal/Zoom";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  console.log(typeof process.env.REACT_APP_FB_APIKEY);
   return (
     <>
       <main className="main">
